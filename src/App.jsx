@@ -4,28 +4,38 @@ import Username from "./components/Username";
 import Email from "./components/Email";
 import Phone from "./components/Phone";
 import { useState } from "react";
-
+import { useSelector } from "react-redux";
 
 function App() {
-  const [click, isClicked] = useState(false);
+  const user = useSelector((state) => state.user.value);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState(0);
+  const [disable, setDisable] = useState(false);
+
   const loginButton = () => {
-      isClicked(true);
-      console.log("the button is clicked", click);
-      setTimeout(() => {
-        isClicked(false);
-      }, 1);
+    if (user.name !== "" && user.email !== "" && user.phone !== 0) {
+      setName(user.name);
+      setEmail(user.email);
+      setPhone(user.phone);
+      setDisable(false);
+    } else {
+      setDisable(true);
+      alert("Must fill the form")
+    }
   };
   return (
     <main className="flex flex-row justify-center h-svh">
       <div className="flex flex-col w-full">
-        <Navbar />
+        <Navbar name={name} email={email} phone={phone} />
         <div className="flex flex-row w-full justify-center">
           <div className="w-3/4 border rounded-lg p-5 m-5 shadow-2xl">
-            <Username event={click} />
-            <Email event={click} />
-            <Phone event={click} />
-            <div className="flex justify-center">
+            <Username />
+            <Email />
+            <Phone />
+            <div className="flex flex-col justify-center items-center">
               <button
+                // disabled={disable}
                 className="bg-blue-400 px-5 py-2 shadow-md  rounded-lg hover:bg-blue-300"
                 onClick={() => {
                   loginButton();
@@ -33,6 +43,13 @@ function App() {
               >
                 Login
               </button>
+              <div
+                className={`text-red-500 text-sm mt-3 ${
+                  disable ? "flex" : "hidden"
+                }`}
+              >
+                Must fill the form
+              </div>
             </div>
           </div>
         </div>

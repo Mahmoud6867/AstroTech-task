@@ -4,12 +4,16 @@ import "react-phone-input-2/lib/bootstrap.css";
 import { useDispatch } from "react-redux";
 import { changePhone } from "../features/user";
 
-const Phone = ({ event }) => {
+const Phone = () => {
   const [phone, setPhone] = useState(0);
   const dispatch = useDispatch();
-  if (event == true && phone !== 0) {
-    dispatch(changePhone({ phone: phone }));
-  }
+
+  const handleChange = (value) => {
+    setPhone(value);
+    if (phone !== 0) {
+      dispatch(changePhone({ phone: value }));
+    }
+  };
   return (
     <div className="flex flex-col text-2xl">
       <label>Phone Number</label>
@@ -21,15 +25,20 @@ const Phone = ({ event }) => {
         enableSearch={true}
         prefix=""
         searchPlaceholder="Search for your country"
-        countryCodeEditable={false}
+        countryCodeEditable={true}
         defaultMask=".... ... ... ... .."
         onChange={(value) => {
-          setPhone(value);
+          handleChange(value);
         }}
         inputProps={{
           required: true,
         }}
       />
+      <div
+        className={`text-red-500 text-sm ${phone === 0 ? "flex" : "hidden"}`}
+      >
+        Please, enter your phone
+      </div>
     </div>
   );
 };

@@ -1,17 +1,17 @@
-import { useState } from "react";
+import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeUsername } from "../features/user";
 
-const Username = ({ event }) => {
+const Username = () => {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
-  if (event == true && name !== "") {
-    dispatch(changeUsername({ name: name }));
-  }
+
   const handleChange = (e) => {
-    console.log("The username event", e);
     setName(e.target.value);
+    if (name !== "") {
+      dispatch(changeUsername({ name: e.target.value }));
+    }
   };
   return (
     <div className="flex flex-col text-2xl">
