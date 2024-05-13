@@ -5,14 +5,15 @@ import Email from "./components/Email";
 import Phone from "./components/Phone";
 import { useState } from "react";
 
+
 function App() {
   const [click, isClicked] = useState(false);
   const loginButton = () => {
-    isClicked(true);
-    console.log("the button is clicked", click);
-    setTimeout(() => {
-      isClicked(false);
-    }, 1);
+      isClicked(true);
+      console.log("the button is clicked", click);
+      setTimeout(() => {
+        isClicked(false);
+      }, 1);
   };
   return (
     <main className="flex flex-row justify-center h-svh">
@@ -26,7 +27,9 @@ function App() {
             <div className="flex justify-center">
               <button
                 className="bg-blue-400 px-5 py-2 shadow-md  rounded-lg hover:bg-blue-300"
-                onClick={() => loginButton()}
+                onClick={() => {
+                  loginButton();
+                }}
               >
                 Login
               </button>

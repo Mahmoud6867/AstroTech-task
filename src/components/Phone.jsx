@@ -7,7 +7,7 @@ import { changePhone } from "../features/user";
 const Phone = ({ event }) => {
   const [phone, setPhone] = useState(0);
   const dispatch = useDispatch();
-  if (event == true) {
+  if (event == true && phone !== 0) {
     dispatch(changePhone({ phone: phone }));
   }
   return (
@@ -16,14 +16,19 @@ const Phone = ({ event }) => {
       <PhoneInput
         className="py-5"
         country={"eg"}
+        onlyCountries={["eg"]}
         value={phone}
-        onChange={(e) => {
-          setPhone(e);
-        }}
         enableSearch={true}
         prefix=""
         searchPlaceholder="Search for your country"
         countryCodeEditable={false}
+        defaultMask=".... ... ... ... .."
+        onChange={(value) => {
+          setPhone(value);
+        }}
+        inputProps={{
+          required: true,
+        }}
       />
     </div>
   );
