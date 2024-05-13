@@ -11,7 +11,6 @@ const Email = () => {
   function validateEmail(email) {
     var regex = /^[^\s@]+@[^\s@]+$/;
     setValEmail(regex.test(email));
-    console.log("email test", regex.test(email));
   }
   const handleChange = (e) => {
     setEmail(e.target.value);

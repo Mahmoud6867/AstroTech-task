@@ -10,7 +10,8 @@ const Phone = () => {
 
   const handleChange = (value) => {
     setPhone(value);
-    if (phone !== 0) {
+    console.log("phone number",value);
+    if (value >= 100000000000) {
       dispatch(changePhone({ phone: value }));
     }
   };
@@ -25,7 +26,7 @@ const Phone = () => {
         enableSearch={true}
         prefix=""
         searchPlaceholder="Search for your country"
-        countryCodeEditable={true}
+        countryCodeEditable={false}
         defaultMask=".... ... ... ... .."
         onChange={(value) => {
           handleChange(value);
@@ -35,9 +36,9 @@ const Phone = () => {
         }}
       />
       <div
-        className={`text-red-500 text-sm ${phone === 0 ? "flex" : "hidden"}`}
+        className={`text-red-500 text-sm ${phone <= 100000000000 ? "flex" : "hidden"}`}
       >
-        Please, enter your phone
+        Phone number is incorrect
       </div>
     </div>
   );

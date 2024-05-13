@@ -14,14 +14,14 @@ function App() {
   const [disable, setDisable] = useState(false);
 
   const loginButton = () => {
-    if (user.name !== "" && user.email !== "" && user.phone !== 0) {
+    if (user.name !== "" && user.email !== "" && user.phone >= 100000000000) {
       setName(user.name);
       setEmail(user.email);
       setPhone(user.phone);
       setDisable(false);
     } else {
       setDisable(true);
-      alert("Must fill the form")
+      alert("Must fill all of the form fields")
     }
   };
   return (
@@ -48,7 +48,7 @@ function App() {
                   disable ? "flex" : "hidden"
                 }`}
               >
-                Must fill the form
+                Must fill all of the form fields
               </div>
             </div>
           </div>
